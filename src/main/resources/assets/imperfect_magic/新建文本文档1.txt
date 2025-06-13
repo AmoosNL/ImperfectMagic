@@ -1,0 +1,163 @@
+	public static void render(Minecraft mc, int width, int height) {
+		
+		long time = System.currentTimeMillis();
+		
+		if (time != lastRender) Display.setTitle("Minecraft 1.12.2 FPS" + (1000 / (time - lastRender)));
+		
+		lastRender = time;
+		
+		if (TimeStopType.currentType() == TimeStopType.SOUND) return;
+		
+		int ssize = 0;
+		
+		ssize = time_in_stop_time * 100;
+		if (ssize > 2000) {
+			ssize = 4000 - ssize;
+		} else if (ssize < 0) {
+			ssize = 0;
+		}
+		
+		if (ssize <= 0) {
+			return;
+		}
+		
+		BufferedImage bufferedimage = ScreenShotHelper.createScreenshot(mc.displayWidth, mc.displayHeight, mc.getFramebuffer());
+        
+		{
+			BufferedImage copy = new BufferedImage((int) (bufferedimage.getWidth() / 1.5f), (int) (bufferedimage.getHeight() / 1.5f), BufferedImage.TYPE_INT_ARGB);
+			copy.getGraphics().drawImage(bufferedimage, 0, 0, copy.getWidth(), copy.getHeight(), null);
+			bufferedimage = copy;
+		}
+		
+		final int w = bufferedimage.getWidth();
+		final int h = bufferedimage.getHeight();
+		
+		final int size = bufferedimage.getWidth() * bufferedimage.getHeight();
+		final int ox = w / 2;
+		final int oy = h / 2;
+		
+		for (int index = 0; index < size; index++) {
+			int x = index % w;
+			int y = index / w;
+			
+			double osize = 0;
+			
+			{
+				int cx = ox - x;
+				int cy = oy - y;
+				osize = Math.sqrt(cx * cx + cy * cy);
+				if (!(osize < ssize)) continue;
+			}
+			
+			int rgb = bufferedimage.getRGB(x, y);
+			
+			{
+				Color c = new Color(rgb);
+				rgb = new Color(255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue()).getRGB();
+			}
+			
+			bufferedimage.setRGB(x, y, rgb);
+		}
+		
+		if (ssize > 0) {
+			for (double r = 0; r < Math.PI * 2; r += (Math.PI / 180)) {
+				double sin = Math.sin(r);
+				double cos = Math.cos(r);
+				int rgb = Color.BLACK.getRGB();
+				{
+					double x2 = cos * ssize + w / 2;
+					double y2 = sin * ssize + h / 2;
+					if (x2 >= 0 && x2 < w && y2 >= 0 && y2 < h) rgb = bufferedimage.getRGB((int) x2, (int) y2);	
+				}
+				for (int i = 0; i < 40; i++) {
+					double x2 = cos * (ssize + i) + w / 2;
+					double y2 = sin * (ssize + i) + h / 2;
+					if (x2 >= 0 && x2 < w && y2 >= 0 && y2 < h) bufferedimage.setRGB((int) x2, (int) y2, rgb);
+				}
+			}
+		}
+		
+		final float p = w / h;
+		
+		if (ssize > 0) {
+			BufferedImage copy = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+			int w2 = (int) (w * (1 - ssize / 2000f));
+			int h2 = (int) (h * (1 - ssize / 2000f) / p);
+			
+			if (w*4/7 > w2) w2 = w*4/7;
+			if (h*4/7 > h2) h2 = h*4/7;
+			
+			BufferedImage image = new BufferedImage(w2, h2, BufferedImage.TYPE_INT_ARGB);
+			image.getGraphics().drawImage(bufferedimage, 0, 0, w2, h2, null);
+			
+			int x1 = w / 2 - w2 / 2;
+			int x2 = w / 2 + w2 / 2;
+			int y1 = h / 2 - h2 / 2;
+			int y2 = h / 2 + h2 / 2;
+			
+			for (float i = 0; i < ssize / 2000f; i+=0.1f) {
+				int w3 = (int) (w * (1 - i));
+				int h3 = (int) (h * (1 - i));
+				copy.getGraphics().drawImage(bufferedimage, w / 2 - w3 / 2, h / 2 - h3 / 2, w3, h3, null);	
+			}
+			
+			for (int index = 0; index < size; index++) {
+				if (index % 4 == 0) continue;
+				int x = index % w;
+				int y = index / w;
+				
+				int rgb = bufferedimage.getRGB(x, y);
+				
+					
+				if (x >= x1 && x < x2 && y >= y1 && y < y2) {
+					rgb = image.getRGB(x - x1, y - y1);
+				} else if (x >= x1 && x < x2) {
+					if (y < y1) {
+						rgb = image.getRGB(x - x1, 0);
+					} else {
+						rgb = image.getRGB(x - x1, h2 - 1);
+					}
+				} else if (y >= y1 && y < y2) {
+					if (x < x1) {
+						rgb = image.getRGB(0, y - y1);
+					} else {
+						rgb = image.getRGB(w2 - 1, y - y1);
+					}
+				} else {
+					continue;
+				}
+				
+				copy.setRGB(x, y, rgb);
+			}
+			
+			/*for (int w3 = w; w3 > w2; w3-=10) {
+				copy.getGraphics().drawImage(bufferedimage, w / 2 - w3 / 2 + (random.nextInt(4) - 2), h / 2 - h2 / 2 + (random.nextInt(4) - 2), w3, h2, null);	
+			}
+			
+			for (int h3 = h; h3 > h2; h3-=10) {
+				copy.getGraphics().drawImage(bufferedimage, w / 2 - w2 / 2 + (random.nextInt(4) - 2), h / 2 - h3 / 2 + (random.nextInt(4) - 2), w2, h3, null);
+			}*/
+			
+			bufferedimage = copy;
+		}
+		 
+		int zLevel = 0;
+		 
+		int texture = TextureUtil.glGenTextures();
+		TextureUtil.uploadTextureImage(texture, bufferedimage);
+         
+		GlStateManager.bindTexture(texture);
+         
+		Tessellator tessellator = Tessellator.getInstance();
+		BufferBuilder bufferbuilder = tessellator.getBuffer();
+		bufferbuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+
+		bufferbuilder.pos(0, height, zLevel).tex(0, 1).endVertex();
+		bufferbuilder.pos(width, height, zLevel).tex(1, 1).endVertex();
+		bufferbuilder.pos(width, 0, zLevel).tex(1, 0).endVertex();
+		bufferbuilder.pos(0, 0, zLevel).tex(0, 0).endVertex();
+         
+		tessellator.draw();
+         
+		TextureUtil.deleteTexture(texture);
+	}

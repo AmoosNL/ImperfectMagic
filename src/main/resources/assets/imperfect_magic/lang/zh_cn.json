@@ -1,0 +1,32 @@
+{
+  "key.imperfect_magic.trigger_condition": "需要紫水晶顶端法杖作为施法节点",
+  "key.imperfect_magic.magic_lv": "魔法等级：Lv.",
+  "key.imperfect_magic.level_up_probability": "升级成功概率:",
+  "key.imperfect_magic.fail_to_lv_up": "升级失败！ ",
+  "key.imperfect_magic.lack_reason_xp_level": " 原因：没有足够的经验等级",
+  "key.imperfect_magic.itemStack_cooldown": "您的魔力节点将被冷却2400游戏刻（120s）",
+  "key.imperfect_magic.level_up_successful": "升级成功!",
+  "key.imperfect_magic.already_max_level": "该魔力节点已达到最高等级",
+  "key.imperfect_magic.cooldown_tick": "冷却时长（游戏刻）:",
+  "key.imperfect_magic.enter_game": "欢迎游玩“并不完美的魔法”，如果对本模组玩法等存在疑问，请打开本模组jar包下的how to play文件",
+
+  "item_group.imperfect_magic.imperfect_magic_tab": "并不完美的魔法",
+
+  "item.imperfect_magic.lightning_link": "雷霆链接",
+  "item.imperfect_magic.void_eye": "虚无之眼",
+  "item.imperfect_magic.blooming_volcano": "熔岩绽放",
+
+  "item.imperfect_magic.winter_flower": "冬之花（迫真",
+  "item.imperfect_magic.curse_watch": "诅咒怀表",
+  "item.imperfect_magic.purge": "圣之净化",
+  "item.imperfect_magic.wind_pocket": "随风袋",
+
+  "item.imperfect_magic.fireball": "火球术",
+  "item.imperfect_magic.sonic": "音爆术",
+
+  "item.imperfect_magic.amethyst_staff": "紫水晶顶端法杖",
+
+  "gamerule.litParticleVisualSize": "lit particle视觉效果大小",
+  "gamerule.litParticleVisualSize.description": "lit particle粒子的视觉效果大小，仅在生成时起效（为实际视觉大小的50倍）"
+
+}

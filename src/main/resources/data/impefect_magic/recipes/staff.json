@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "  2",
+    " 4 ",
+    "6  "
+  ],
+  "key": {
+    "2": {
+      "item": "minecraft:amethyst_cluster"
+    },
+    "4": {
+      "item": "minecraft:copper_ingot"
+    },
+    "6": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "result": {
+    "item": "imperfect_magic:amethyst_staff",
+    "count": 1
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "key.imperfect_magic.trigger_condition": "Need Trigger Node:Amethyst Staff",
+  "key.imperfect_magic.magic_lv": "Magic LV.",
+  "key.imperfect_magic.level_up_probability": "Level Up Probability:",
+  "key.imperfect_magic.fail_to_lv_up": "Fail To Level Up!",
+  "key.imperfect_magic.lack_reason_xp_level": " Reason: Lack Enough Xp Level",
+  "key.imperfect_magic.itemStack_cooldown": "Unluckily, Your Magic Node Cooldown 2400 ticks(120s).",
+  "key.imperfect_magic.level_up_successful": "Level Up Successful!",
+  "key.imperfect_magic.already_max_level": "The Magic Node Has Reached Its Maximum Level",
+  "key.imperfect_magic.cooldown_tick": "CooldownTick:",
+  "key.imperfect_magic.enter_game": "  Welcome to play \"Imperfect Magic\", if you have any questions about how to play this module, please open the \"how to play\" file under this module's jar package.",
+
+  "item_group.imperfect_magic.imperfect_magic_tab": "Imperfect Magic",
+
+  "item.imperfect_magic.lightning_link": "Lightning link",
+  "item.imperfect_magic.void_eye": "Void Eye",
+  "item.imperfect_magic.blooming_volcano": "Volcano Magic",
+
+  "item.imperfect_magic.winter_flower": "Winter Flower",
+  "item.imperfect_magic.curse_watch": "Curse Magic",
+  "item.imperfect_magic.purge": "Purge Magic",
+  "item.imperfect_magic.wind_pocket": "Wind Magic",
+
+  "item.imperfect_magic.fireball": "Fireball Magic",
+  "item.imperfect_magic.sonic": "Sonic Magic",
+
+  "item.imperfect_magic.amethyst_staff": "Amethyst Staff",
+
+  "gamerule.litParticleVisualSize": "Lit Particle Visual Size",
+  "gamerule.litParticleVisualSize.description": "The Visual Size Of Lit Particle(50 times the real visual size)"
+}
